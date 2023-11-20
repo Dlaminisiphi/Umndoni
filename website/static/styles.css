@@ -1,16 +1,24 @@
+/* Importing Google Fonts for the 'Poppins' and 'Vina Sans' font families */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Vina+Sans&display=swap');
+
+/* Resetting default margin, padding, and box-sizing for all elements */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
+
+/* Setting the default font family for the body and removing text decoration for anchor tags */
 body{
     font-family: "Poppins",sans-serif;
 }
+
 a, a:hover{
     text-decoration: none;
 }
+
+/* Styling for the top bar containing contact information and social media links */
 .top-bar{
     display: flex;
     align-items: center;
@@ -18,85 +26,205 @@ a, a:hover{
     padding: 10px 25px;
     background: #ADD8E6;
 }
+
 .top-bar span{
     color: #fff;
 }
+
 .top-bar ul{
     list-style: none;
     display: flex;
 }
+
 .top-bar li{
     margin: 0px 5px;
 }
+
 .top-bar a{
     color: #fff;
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: bold
 }
+
 .top-bar a:hover{
     color: #222;
 }
+
+/* Styling for the main navigation bar */
 nav{
     background: #0000FF;
     padding: 5px 20px;
     display: flex;
     align-items: center;
 }
+
 nav a{
     color: #fff;
-     
 }
- nav a:hover{
+
+nav a:hover{
     color: #ef4b3f;
- }
- .logo{
+}
+
+/* Styling for the logo section in the navigation bar */
+.logo{
     flex: 1;
- }
- .logo a{
+}
+
+.logo a{
     display: flex;
     align-items: center;
     font-size: 28px;
     font-weight: bold;
- }
- .logo a:hover{
+}
+
+.logo a:hover{
     color: #fff;
- }
+}
 
 .logo img{
     width: 90px;
     margin-right: 30px;
     border-radius: 50%;
-
 }
+
+/* Styling for the menu items in the navigation bar */
 .menu{
     display: flex;
     align-items: center;
     list-style: none;
 }
+
 .menu li{
     padding: 15px 10px;
     font-size: 16px;
 }
+
+/* Styling for the menu toggle button */
 .toggle{
     font-size: 30px;
     display: none;
 }
+
+/* Media query for responsive design on screens with a maximum width of 600px */
 @media screen and (max-width: 600px) {
     nav{
         display: block;
         position: relative;
         padding: 15px 20px;
     }
+
     .menu{
         margin-top: 15px;
         display: none;
     }
+
     .menu.active, .toggle{
         display: block;
     }
+
     .toggle{
         position: absolute;
         top: 15px;
         right: 20px;
     }
 }
+
+/* Styling for the header section of the Home page the page */
+header{
+    text-align: center;
+    font-family: "Poppins",sans-serif;
+    margin-bottom: 70px;
+}
+
+header h1{
+    font-size: 60px;
+}
+
+header p{
+    font-size: 40px;
+}
+
+/* Styling for the sections on home page*/
+section {
+    text-align: center;
+    margin: 0 auto; 
+    max-width: 1200px; 
+    padding: 30px; 
+    border: 5px solid #ddd; 
+    margin-bottom: 15px;
+ 
+  }
+ /* Remove default list styling (numbers) for the ordered list within a section */
+section ol {
+    list-style: none;
+}
+ /* Remove default list styling (numbers) for the ordered list within a section */
+ section ul {
+    list-style: none;
+}
+/* Styling for the heading within a section */
+section h2{
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+/* Styling for paragraphs within a section */
+section p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Styling for subheadings within a section */
+section h3{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/* Styling for ion-icon within an h2 heading */
+h2 ion-icon {
+    margin-left: 8px; 
+    font-size: inherit;
+}
+
+/* Styling for images with the class 'step-image' within a section */
+img.step-image {
+    width: 100%; 
+    max-width: 170px; 
+    height: auto; 
+    display: block; 
+    margin: 10px auto; 
+    margin-bottom: 15px;
+}
+/* Additional styling for the instruction text */
+section .instruction-text {
+    font-size: 18px;
+}
+
+/* Styling for the list items within the Featured Categories section */
+section .featured-categories li {
+    font-size: 28px; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+}
+.featured-categories li img.category-icon {
+    height: 40px; 
+    margin-right: 10px; 
+}
+.SignupButton{
+    color: #fff;
+    padding: 12px 26px;
+    border-radius: 6px;
+    background: #0000FF;
+    margin: 0 auto;
+    font-size: 16px;
+    transition: all 0.2a ease;
+}
+.SignupButton:active{
+    transform: scale(0.94);
+}
+.SignupButton:hover {
+    background: #6c9ff0; 
+    transform: scale(1.05); 
+}
+
