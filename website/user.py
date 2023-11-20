@@ -1,8 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 user = Blueprint('user',__name__)
 
 @user.route('/')
 def home():
-    pass
+    return render_template("home_page.html")
 
