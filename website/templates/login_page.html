@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <!-- Header Section -->
+    <title>{% block title %}Login Page{% endblock %}</title>
+</head>
+<body>
+    <!-- Top Bar Section -->
+    <div class="top-bar">
+        <span><ion-icon name="call-outline"></ion-icon> 039 976 1202</span>
+        <ul>
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation Section -->
+    <nav>
+        <!-- Logo -->
+        <div class="logo">
+            <a><img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" alt="logo">Umdoni Municipality</a>
+        </div>
+        
+        <!-- Toggle Button for Mobile Menu -->
+        <div class="toggle">
+            <a href=""><ion-icon name="menu-outline"></ion-icon></a>
+        </div>
+
+        <!-- Menu Items -->
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        </ul>
+    </nav>
+<!-- Content Section -->
+<section>
+    <!-- Container for content -->
+    <div class="wrapper">
+        {% block content %}
+        <!-- Form for login -->
+        <form action="/login" method="post">
+            <!-- Login heading -->
+            <h1> Login</h1>
+
+            <!-- Email input box with mail icon -->
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Email" required>
+                <i><ion-icon name="mail-outline"></ion-icon></i>
+            </div>
+
+            <!-- Password input box with lock icon -->
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+                <i><ion-icon name="lock-closed-outline"></ion-icon></i>
+            </div>
+
+            <!-- Remember me and forgot password section -->
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#"> Forgot password</a>
+            </div>
+
+            <!-- Login button -->
+            <button type="submit" class="btn">Login</button>
+
+            <!-- Register link -->
+            <div class="register-link">
+                <p>Don't have an account? <a href="/signup">Register</a></p>
+            </div>
+        </form>
+        {% endblock %}
+    </div>
+</section>
+
+
+        <!-- jQuery Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+        <!-- JavaScript for Mobile Menu Toggle -->
+        <script>
+            $(function(){
+                $(".toggle").on("click", function(){
+                    if($(".menu").hasClass("active")){
+                        $(".menu").removeClass("active")
+                        $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
+                    } else {
+                        $(".menu").addClass("active");
+                        $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
+                    }
+                }); 
+            });
+        </script>
+
+</body>
+
+
+
+</html>
