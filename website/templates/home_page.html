@@ -1,24 +1,30 @@
 {% extends "base.html" %} {% block title %} Home Page{% endblock %}
 {% block content %}
+<!-- Header Section -->
 <header>
     <h1>FixIt Umndoni</h1>
     <p>Report and track municipal issues in your area</p>
 </header>
+
+<!-- How It Works Section -->
 <section>
     <h2>How It Works <ion-icon name="help-outline"></ion-icon></h2>
     <p>Report problems like broken streetlights and other public infrastructure issues easily with our web app. Follow these simple steps:</p>
     
     <ol>
+        <!-- Step 1 -->
         <li>
             <h3>Step 1</h3>
             <p class="instruction-text">Create an account or sign in to your existing account.</p>
             <img src="{{ url_for('static', filename='images/step1.gif') }}" alt="Step 1 GIF" class="step-image">
         </li>
+        <!-- Step 2 -->
         <li>
             <h3>Step 2</h3>
             <p class="instruction-text">Submit a new issue, providing details and location information.</p>
             <img src="{{ url_for('static', filename='images/step2.gif') }}" alt="Step 2 GIF" class="step-image">
         </li>
+        <!-- Step 3 -->
         <li>
             <h3>Step 3</h3>
             <p class="instruction-text">Track the status of reported issues on the dashboard.</p>
@@ -27,36 +33,38 @@
     </ol>
 </section>
 
-
+<!-- Featured Categories Section -->
 <section>
     <h2>Featured Categories <ion-icon name="apps-outline"></ion-icon></h2>
     <ul class="featured-categories">
+        <!-- Streetlights Category -->
         <li>
-            <img src="https://cdn-icons-png.flaticon.com/512/5613/5613816.png" alt="Category Icon" class="category-icon"> Streetlights
+            <img src="https://cdn-icons-png.flaticon.com/512/5613/5613816.png" alt="Streetlights Icon" class="category-icon"> Streetlights
         </li>
+        <!-- Potholes Category -->
         <li>
-            <img src="https://cdn-icons-png.flaticon.com/512/497/497817.png" alt="Category Icon" class="category-icon"> Potholes
+            <img src="https://cdn-icons-png.flaticon.com/512/497/497817.png" alt="Potholes Icon" class="category-icon"> Potholes
         </li>
+        <!-- Garbage Collection Category -->
         <li>
-            <img src="https://cdn-icons-png.flaticon.com/512/199/199458.png" alt="Category Icon" class="category-icon"> Garbage Collection
+            <img src="https://cdn-icons-png.flaticon.com/512/199/199458.png" alt="Garbage Collection Icon" class="category-icon"> Garbage Collection
         </li>
+        <!-- Illegal Dumping Category -->
         <li>
-            <img src="https://cdn.vectorstock.com/i/preview-1x/47/83/no-freight-transport-forbidden-sign-modern-round-vector-33094783.jpg" alt="Category Icon" class="category-icon"> Illegal Dumping
+            <img src="https://cdn.vectorstock.com/i/preview-1x/47/83/no-freight-transport-forbidden-sign-modern-round-vector-33094783.jpg" alt="Illegal Dumping Icon" class="category-icon"> Illegal Dumping
         </li>
+        <!-- Storm Drains Category -->
         <li>
-            <img src="https://t4.ftcdn.net/jpg/06/40/22/65/360_F_640226539_oLP1y5zORzSYfXYcNgnFxAmz8EodJsNM.jpg" alt="Category Icon" class="category-icon"> Storm Drains
+            <img src="https://t4.ftcdn.net/jpg/06/40/22/65/360_F_640226539_oLP1y5zORzSYfXYcNgnFxAmz8EodJsNM.jpg" alt="Storm Drains Icon" class="category-icon"> Storm Drains
         </li>
     </ul>
 </section>
 
-
-
+<!-- Get Involved Section -->
 <section>
     <h2>Get Involved</h2>
     <p>Help improve our community by actively participating in issue reporting. Every report counts!</p>
-    <button class="SignupButton"> Sign Up</button>
+    <button onclick="window.location.href='/login'" class="SignupButton"><ion-icon 
+        name="person-outline"></ion-icon> Login</button>
 </section>
-
-
-
 {% endblock %}

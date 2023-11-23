@@ -130,6 +130,10 @@ nav a:hover{
     }
 }
 
+
+
+/* BELOW IS STYLE FOR HOME PAGE*/
+
 /* Styling for the header section of the Home page the page */
 header{
     text-align: center;
@@ -213,11 +217,12 @@ section .featured-categories li {
 }
 .SignupButton{
     color: #fff;
+
     padding: 12px 26px;
-    border-radius: 6px;
+    border-radius: 10px;
     background: #0000FF;
     margin: 0 auto;
-    font-size: 16px;
+    font-size: 1rem;
     transition: all 0.2a ease;
 }
 .SignupButton:active{
@@ -226,5 +231,128 @@ section .featured-categories li {
 .SignupButton:hover {
     background: #6c9ff0; 
     transform: scale(1.05); 
+}
+
+
+/* Media query for responsive design on screens with a maximum width of 600px */
+@media screen and (max-width: 600px) {
+    section {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    section h2 {
+        font-size: 30px; /* Adjust font size for smaller screens */
+    }
+
+    section p {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    section h3 {
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+
+    .featured-categories li {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .featured-categories li img.category-icon {
+        height: 30px; /* Adjust icon height for smaller screens */
+    }
+}
+
+/* Your existing styles for larger screens */
+
+/* Styling for the sections on home page */
+section {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 30px;
+    border: 5px solid #ddd;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Remove default list styling (numbers) for the ordered list within a section */
+section ol {
+    list-style: none;
+}
+
+/* Remove default list styling (numbers) for the ordered list within a section */
+section ul {
+    list-style: none;
+}
+
+/* Styling for the heading within a section */
+section h2 {
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+/* Styling for paragraphs within a section */
+section p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Styling for subheadings within a section */
+section h3 {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/* Styling for ion-icon within an h2 heading */
+h2 ion-icon {
+    margin-left: 8px;
+    font-size: inherit;
+}
+
+/* Styling for images with the class 'step-image' within a section */
+img.step-image {
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    margin-bottom: 15px;
+}
+
+/* Additional styling for the instruction text */
+section .instruction-text {
+    font-size: 18px;
+}
+
+/* Styling for the list items within the Featured Categories section */
+section .featured-categories li {
+    font-size: 28px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.featured-categories li img.category-icon {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Styling for the SignupButton */
+.SignupButton {
+    color: #fff;
+    padding: 12px 26px;
+    border-radius: 10px;
+    background: #0000FF;
+    margin: 0 auto;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.SignupButton:active {
+    transform: scale(0.94);
+}
+
+.SignupButton:hover {
+    background: #6c9ff0;
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
