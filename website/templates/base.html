@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <!-- Header Section -->
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -40,30 +42,22 @@
         </ul>
     </nav>
 
-    <!-- jQuery Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- JavaScript for Mobile Menu Toggle -->
-    <script>
-        $(function(){
-            $(".toggle").on("click", function(){
-                if($(".menu").hasClass("active")){
-                    $(".menu").removeClass("active")
-                    $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-                } else {
-                    $(".menu").addClass("active");
-                    $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-                }
-            }); 
-        });
-    </script>
 
     <!-- Content Section -->
     <div>
         {% block content %}{% endblock %}
     </div>
+    <script>
+        // JavaScript for Mobile Menu Toggle 
+        $(document).ready(function () {
+            $(".toggle").on("click", function () {
+                $(".menu").toggleClass("active");
+                var icon = $(".menu").hasClass("active") ? 'close-outline' : 'menu-outline';
+                $(this).find("a").html("<ion-icon name='" + icon + "'></ion-icon>");
+            });
+        });
+    </script>
 </body>
-
 
 
 </html>

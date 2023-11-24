@@ -19,3 +19,13 @@ def login():
 def signup():
     # Render the signup page template
     return render_template("signup_page.html")
+# Route for the signup page
+@user.route('/user', methods=['GET', 'POST'])
+def userpage():
+    # Render the signup page template
+    return render_template("user_dashboard.html")
+
+@user.route('/dash', methods=['GET', 'POST'])
+def dash():
+    # Render the signup page template
+    return render_template("user_report_page.html")

@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Setting the default font family for the body and removing text decoration for anchor tags */
@@ -356,3 +357,234 @@ section .featured-categories li {
     cursor: pointer;
 }
 
+
+/* User Dashboard Section*/
+
+/* the category section */
+.category-section {
+    width: 100%;
+    height: 100vh;
+    padding: 0 8%;
+}
+
+/* heading within the category section */
+.category-section h1 {
+    text-align: center;
+    padding-top: 10%;
+    margin-bottom: 60px;
+    font-weight: 600;
+    position: relative;
+}
+
+/*underline effect after the heading */
+.category-section h1::after {
+    content: '';
+    background: #303ef7;
+    width: 100px;
+    height: 5px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* grid layout of categories */
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+}
+
+/* individual categories */
+.categories {
+    text-align: center;
+    padding: 25px 10px;
+    border-radius: 5px;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    transition: transform 0.5s, background 0.5s;
+}
+
+/*category images */
+.category-images {
+    max-width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/*category headings */
+.categories h2 {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/*category hover effect */
+.categories:hover {
+    background: #303ef7;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+
+/*User Report Page Style*/
+
+
+/* e dropdown icon */
+.dropdown-icon {
+    width: 1.2em;
+    height: 1.2em;
+    position: relative;
+    top: 4px;
+}
+
+/*  overall report form container */
+.report-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.report-form h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+/*  dropdown container */
+.dropdown {
+    position: relative;
+    margin-top: 10px;
+    width: 300px;
+    height: 50px;
+}
+
+/* icon before the dropdown */
+.dropdown::before {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 10000;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #333;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(-45deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+/* arrow icon when the dropdown is activated */
+.dropdown.activate::before {
+    top: 22px;
+    transform: rotate(-225deg);
+}
+
+/* text input inside the dropdown */
+.dropdown input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 12px 20px;
+    border-radius: 10px;
+}
+
+/*  dropdown options container */
+.dropdown .option {
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 30px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+}
+
+/* dropdown options when the dropdown is activated */
+.dropdown.activate .option {
+    display: block;
+}
+
+/*  each option inside the dropdown */
+.dropdown .option div {
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+/* hover effect on dropdown options */
+.dropdown .option div:hover {
+    background: #62baea;
+}
+
+
+/* Style for the brief description field */
+h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style for the image upload */
+input[type="file"] {
+    margin-top: 10px;
+}
+
+label[for="image-upload"] {
+    
+    margin-right: 20px; 
+}
+
+/* Style for the address field */
+label[for="address"] {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+
+input#address {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+    background: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: #45a049;
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}User Dashboard Page{% endblock %}
+{% block content %}
+<!-- category section -->
+<div class="category-section">
+    <h1>Pick a service</h1>
+    <!-- row of categories -->
+    <div class="row">
+        <!-- Report a maintenance problem category -->
+        <a href="/report-maintenance" class="categories">
+            <img src="{{ url_for('static', filename='images/filling-form.png') }}" title="Report" class="category-images">
+            <h2>Report a maintenance problem</h2>
+            <p>Help improve our community by reporting maintenance issues.</p>
+        </a>
+        <!-- Profile category -->
+        <a href="/profile" class="categories">
+            <img src="{{ url_for('static', filename='images/profile.png') }}" title="Profile" class="category-images">
+            <h2>Profile</h2>
+            <p>Manage and personalize your user profile to access and update your information.</p>
+        </a>
+        <!-- Track your reports category -->
+        <a href="/track-reports" class="categories">
+            <img src="{{ url_for('static', filename='images/track.png') }}" title="Track Reports" class="category-images">
+            <h2>Track your reports</h2>
+            <p>Stay informed about the status of your submitted reports.</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
