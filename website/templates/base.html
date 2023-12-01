@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Ionicons module for icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+    <!-- Link to your custom stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- jQuery again (ensure only one jQuery library is loaded) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- jQuery library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <!-- Header Section -->
+
+    <!-- Google Maps API with Places library -->
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places"></script>
+
+    <!-- Title for the page -->
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <!-- Top Bar Section -->
     <div class="top-bar">
+        <!-- Contact information and social media icons -->
         <span><ion-icon name="call-outline"></ion-icon> 039 976 1202</span>
         <ul>
             <li><a href="https://web.facebook.com/umdonimunicipalitynews/?_rdc=1&_rdr"><ion-icon name="logo-facebook"></ion-icon></a></li>
@@ -21,34 +35,78 @@
         </ul>
     </div>
 
-    <!-- Navigation Section -->
-    <nav>
-        <!-- Logo -->
-        <div class="logo">
-            <a><img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" alt="logo">Umdoni Municipality</a>
-        </div>
-        
-        <!-- Toggle Button for Mobile Menu -->
-        <div class="toggle">
-            <a href=""><ion-icon name="menu-outline"></ion-icon></a>
-        </div>
+  <!-- Navigation Section -->
+<nav>
+    <!-- Logo -->
+    <div class="logo">
+        <!-- Link to the home page with the logo -->
+        <a href="{{ url_for('user.home') }}"><img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" alt="logo">FixIt Umndoni</a>
+    </div>
 
-        <!-- Menu Items -->
-        <ul class="menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
-    </nav>
+    <!-- Toggle Button for Mobile Menu -->
+    <div class="toggle">
+        <!-- Icon for the mobile menu toggle -->
+        <a href=""><ion-icon name="menu-outline"></ion-icon></a>
+    </div>
+
+    <!-- Menu Items -->
+    <ul class="menu">
 
 
+        {% if current_user.is_authenticated %}
+            <!-- If the user is logged in, show these links -->
+            <li><a href="">Profile</a></li>
+            <li><a href="">Report Issue</a></li>
+            <li><a href="">Track Query</a></li>
+            <li><a href="/logout">Log Out</a></li>
+        {% else %}
+            <!-- If the user is not logged in, show these links -->
+            <li><a href="">Login</a></li>
+            <!-- Navigation links -->
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- Check if there are messages to display -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message  in messages %}
+            <!-- Create a pop-up div with dynamic styling for the button -->
+            <div class="popup open-popup">
+                <!-- ... rest of the code ... -->
+                {% if category == 'success' %}
+                    <!-- Positive pop-up styling for success messages -->
+                    <img src="{{ url_for('static', filename='images/tick.png') }}" alt="tick-image">
+                    <h2>Thank You</h2>
+                    <!-- Set green color for success button -->
+                    <p>{{ message }}</p>
+                    <button type="button" onclick="closePopup()" style="background-color: green;">OK</button>
+                {% else %}
+                    <!-- Negative pop-up styling for other messages -->
+                    <img src="{{ url_for('static', filename='images/cross.png') }}" alt="cross-image">
+                    <h2>Oops!</h2>
+                    <!-- Set red color for error button -->
+                    <p>{{ message }}</p>
+                    <button type="button" onclick="closePopup()" style="background-color: red;">OK</button>
+                {% endif %}
+                
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+</div>
     <!-- Content Section -->
     <div>
+        <!-- Block for page-specific content -->
         {% block content %}{% endblock %}
     </div>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
     <script>
-        // JavaScript for Mobile Menu Toggle 
         $(document).ready(function () {
             $(".toggle").on("click", function () {
                 $(".menu").toggleClass("active");
@@ -57,7 +115,13 @@
             });
         });
     </script>
+    <script>
+        function closePopup() {
+            console.log('Closing popup');
+            var popup = document.querySelector('.popup');
+            popup.classList.remove('open-popup');
+        }
+        
+    </script>
 </body>
-
-
 </html>

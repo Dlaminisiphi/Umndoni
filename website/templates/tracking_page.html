@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block title %} Tracking - FixIt Umndoni{% endblock %}
+{% block content %}
+<!-- Container for the entire issue tracking section -->
+<div class="track-styles">
+
+    <!-- Container for issue information -->
+    <div class="track-info">
+
+        <!-- Details about the reported issue -->
+        <div class="details">
+
+            <!-- Title of the reported issue -->
+            <div class="Issue">
+                <h1>Reported Issue: <span>Street lights</span></h1>
+            </div>
+
+            <!-- Date and Reference information -->
+            <div class="date">
+                <p>Date Reported: 21/10/2021</p>
+                <p>Refrence: <b>3838383223342</b> </p>
+            </div>
+
+        </div>
+
+        <!-- Progress tracker section -->
+        <div class="track">
+
+            <!-- Unordered list representing progress stages -->
+            <ul id="progress" class="text-center">
+                <!-- Stages with class "active" are completed -->
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class=""></li> <!-- Incomplete stage -->
+            </ul>
+
+        </div>
+
+        <!-- Section for tracking lists (stages) -->
+        <div class="track-lists">
+
+            <!-- Stage 1: Received -->
+            <div class="track-list">
+                <img src="{{ url_for('static', filename='images/recieved.png') }}" alt="Processed Icon">
+                <p>Report:<br> Received</p>
+            </div>
+
+            <!-- Stage 2: With Maintenance Team -->
+            <div class="track-list">
+                <img src="{{ url_for('static', filename='images/maintenance.png') }}" alt="Maintenance Icon">
+                <p>Report:<br> With Maintenance Team</p>
+            </div>
+
+            <!-- Stage 3: Work Officially Commenced -->
+            <div class="track-list">
+                <img src="{{ url_for('static', filename='images/work-in-progress.png') }}" alt="Work Commenced Icon">
+                <p>Report:<br> Work Officially Commenced</p>
+            </div>
+
+            <!-- Stage 4: Query Fixed -->
+            <div class="track-list">
+                <img src="{{ url_for('static', filename='images/verified.png') }}" alt="Query Fixed Icon">
+                <p>Report:<br> Query Fixed</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

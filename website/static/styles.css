@@ -130,6 +130,59 @@ nav a:hover{
         right: 20px;
     }
 }
+/* Styles for the popup container */
+.popup {
+    width: 400px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+    z-index: 1000;
+}
+
+/* Styles for the open-popup state of the container */
+.open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Styles for images inside the popup */
+.popup img {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for heading 2 inside the popup */
+.popup h2 {
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+/* Styles for buttons inside the popup */
+.popup button {
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #4a82d6;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
 
 
 
@@ -218,10 +271,9 @@ section .featured-categories li {
 }
 .SignupButton{
     color: #fff;
-
     padding: 12px 26px;
     border-radius: 10px;
-    background: #0000FF;
+    background: #0404af;
     margin: 0 auto;
     font-size: 1rem;
     transition: all 0.2a ease;
@@ -357,6 +409,119 @@ section .featured-categories li {
     cursor: pointer;
 }
 
+
+/*Login and Signup*/
+/* Styling for the main content section */
+.login-sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background: #eceff1;
+   
+}
+
+/* Styling for the wrapper/container */
+.wrapper {
+    width: 420px;
+    border-radius: 10px;
+    padding: 30px 40px;
+    background: #eceff1;
+}
+
+/* Styling for the heading inside the wrapper */
+.wrapper h1 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+/* Styling for the input boxes and their contents */
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.071);
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+/* Styling for the "remember me" and "forgot password" section */
+.wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+    margin-right: 3px;
+}
+
+.remember-forgot label {
+    color: rgb(85, 77, 77);
+}
+
+.remember-forgot a {
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the login button */
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background:#4a61e2;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Styling for the register link section */
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a {
+
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
 
 /* User Dashboard Section*/
 
@@ -545,7 +710,15 @@ textarea {
     border-radius: 5px;
 }
 
-/* Style for the image upload */
+/* Style for the file input container */
+.file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 10px;  /* Add the margin-top style */
+}
+
+/* Style for the actual file input */
 input[type="file"] {
     margin-top: 10px;
 }
@@ -573,18 +746,318 @@ input#address {
     margin-bottom: 20px;
 }
 
-/* Style for the submit button */
-input[type="submit"] {
-    background: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
+
+/*  Submit button style  */
+.btn {
+    border-radius: 1.5em;
+    display: block;
+    position: relative;
+    width: 7.5em;
+    height: 3em;
     font-size: 18px;
     font-family: "Poppins", sans-serif;
     border: none;
-    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background: #45a049;
+/* Submit button active state */
+.btn:not(:disabled):active {
+    transform: translateY(0.1em);
+}
+
+/* Submit button text styles */
+.btn__text {
+    background-color: var(--primary1);
+    border-radius: inherit;
+    color: hsl(0, 0%, 100%);
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    transition: background-color 0.15s linear, color 0.15s 0.3s ease-in-out;
+    width: 100%;
+}
+
+/* Submit button hover and focus styles */
+.btn:not(:disabled):focus .btn__text,
+.btn:not(:disabled):hover .btn__text {
+    background-color: var(--primary2);
+}
+
+/* Progress indicator styles */
+.btn__progress {
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3em;
+    height: 3em;
+    visibility: hidden;
+}
+
+/* Progress track styles */
+.btn__progress-track {
+    r: 12px;
+    stroke: var(--bg2);
+    stroke-width: 24;
+}
+
+/* Progress fill styles */
+.btn__progress-fill {
+    stroke: var(--primary1);
+    stroke-dashoffset: 125.66;
+}
+
+/* Progress check styles */
+.btn__progress-check {
+    stroke: hsl(0, 0%, 100%);
+    stroke-dashoffset: 34;
+}
+
+/* Both running and done states styles */
+.btn--running,
+.btn--done {
+    outline: none;
+    pointer-events: none;
+    width: 3em;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Text and progress visibility transition for running and done states */
+.btn--running .btn__text,
+.btn--done .btn__text {
+    color: transparent;
+    transition: background-color 0.3s ease-in-out, visibility 0.3s steps(1);
+}
+
+/* Progress visibility transition for running and done states */
+.btn--running .btn__progress,
+.btn--done .btn__progress {
+    visibility: visible;
+}
+
+/* Running state styles */
+.btn--running .btn__text {
+    background-color: var(--bg2);
+    visibility: hidden;
+}
+
+/* Progress styles for running state */
+.btn--running .btn__progress {
+    transition: visibility 0.3s 0.3s steps(1, start);
+}
+
+/* Progress track transition for running state */
+.btn--running .btn__progress-track {
+    r: 20px;
+    stroke-width: 8;
+    transition: r 0.3s 0.3s ease-in-out, stroke-width 0.3s 0.3s ease-in-out;
+}
+
+/* Progress fill transition for running state */
+.btn--running .btn__progress-fill {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 2s 0.6s linear;
+}
+
+/* Done state styles */
+.btn--done .btn__progress-track {
+    stroke: var(--primary1);
+    transition: r 0.3s ease-in-out, stroke-width 0.3s ease-in-out;
+}
+
+/* Progress check transition for done state */
+.btn--done .btn__progress-check {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s 0.3s ease-out;
+}
+
+/* Root variables for color scheme and font size */
+.button-styles {
+    --hue: 223;
+    --bg1: hsl(var(--hue), 10%, 90%);
+    --bg2: hsl(var(--hue), 10%, 80%);
+    --fg1: hsl(var(--hue), 10%, 10%);
+    --fg2: hsl(var(--hue), 10%, 20%);
+    --primary1: hsl(var(--hue), 90%, 55%);
+    --primary2: hsl(var(--hue), 90%, 45%);
+    font-size: calc(20px + (40 - 20) * (100vw - 320px) / (1280 - 320));
+}
+
+/*Style for Tracking Page*/
+
+/* Container styling for the entire tracking section */
+.tracking-style{
+    width: 100%;
+    min-height: 100vh;
+    background:#8c9eff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.4;
+}
+
+/* Styling for the main information container */
+.track-info{ 
+    width: 75%;
+    max-width: 100%;
+    padding: 40px;
+    margin: 0 auto;
+    background: #eceff1;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
+/* Styling for the details section within the main container */
+.details{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Styling for the reported issue title */
+.Issue h1{
+    text-transform: uppercase;
+}
+
+/* Styling for the span within the reported issue title */
+.Issue span{
+    color: #007bfd;
+}
+
+/* Styling for the date information */
+.date p{
+    font-size: 1.1em;
+}
+
+/* Styling for the progress tracker */
+.track{
+    margin: 4em 0 8em;
+}
+
+/* Styling for the progress tracker list */
+#progress {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    position: relative;
+    text-align: center;
+}
+
+/* Styling for individual progress tracker items */
+#progress li{
+    width: 20%;
+    position: relative;
+}
+
+/* Styling for the checkmark before completed items in the progress tracker */
+#progress li::before{
+    content: '\2713';
+    position: absolute;
+    display: flex;
+    justify-content:center;
+    width: 50px;
+    align-items: center;
+    font-size: 2rem;
+    height: 50px;
+    background:  #651fff;
+    color: #fff;
+    border-radius: 50%;
+    z-index: 11111;
+}
+
+/* Styling for the checkmark before the last completed item in the progress tracker */
+#progress li:last-child::before{
+    content: '\2713';
+    font-weight: bold;
+    background: #c5cae9;
+}
+
+/* Styling for the line indicating progress in the progress tracker */
+#progress::before{
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 55%;
+    margin-left: 35px;
+    height: 10px;
+    background: #651fff;
+    z-index: 111;
+}
+
+/* Styling for the line indicating remaining progress in the progress tracker */
+progress::after{
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 80%;
+    height: 10px;
+    background: #c5cae9;
+}
+
+/* Styling for the section containing the different stages of the issue resolution process */
+.track-lists{
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Styling for individual stages in the issue resolution process */
+.track-list{
+    display: flex;
+    gap: 1em;
+    flex: 1 1 50px ;
+}
+
+/* Styling for the text within each stage in the issue resolution process */
+.track-list p{
+    font-size: 1.1em;
+}
+
+/* Styling for the icons representing different stages in the issue resolution process */
+.track-lists img{
+    width: 50px;
+    height: 40px;
+}
+
+
+
+/*Style for User Profile*/
+
+/* Styling for focused form controls */
+.form-control:focus {
+    box-shadow: none;       
+}
+
+/* Styling for the profile button */
+.profile-button {
+    box-shadow: none;
+    border: none;                 
+}
+/* Styling for the profile button when focused */
+.profile-button:focus {
+    box-shadow: none;    
+}
+
+/* Styling for the profile button when active (pressed) */
+.profile-button:active {
+    box-shadow: none; 
+}
+
+/* Styling for the back link on hover */
+.back:hover {
+    cursor: pointer;
+}
+
+/* Styling for labels */
+.labels {
+    font-size: 11px;
 }

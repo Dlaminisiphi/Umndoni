@@ -1,46 +1,55 @@
-{% extends "login_page.html" %} {% block title %} Sign Up Page{% endblock %}
+{% extends "base.html" %} {% block title %} Sign Up - FixIt Umndoni{% endblock %}
 {% block content %}
-<form action="/signup" method="post">
-    <!-- Sign Up heading -->
-    <h1> Sign Up</h1>
+<!-- Content Section -->
+<div class="login-sign">
+        <!-- Container for content -->
+        <div class="wrapper">
+            <form action="/signup" method="post">
+                <!-- Sign Up heading -->
+                <h1> Sign Up</h1>
+            
+                <!-- Email input box -->
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Email" required>   
+                </div>
+            
+                <!-- Name input box -->
+                <div class="input-box">
+                    <input type="text" name="name" placeholder="Name" required>   
+                </div>
+            
+                <!-- Surname input box -->
+                <div class="input-box">
+                    <input type="text" name="surname" placeholder="Surname" required>   
+                </div>
+            
+                <!-- Phone number input box -->
+                <div class="input-box">
+                    <input type="text" name="phone_number" placeholder="Phone number" required>        
+                </div>
+            
+                <!-- Password input box -->
+                <div class="input-box">
+                    <input type="password" name="password" placeholder="Password" required> 
+                </div>
+            
+                <!-- Re-Type Password input box -->
+                <div class="input-box">
+                    <input type="password" name="password2" placeholder="Re-Type password" required>
+                </div>
+            
+                <!-- Sign Up button -->
+                <button type="submit" class="btn">Sign Up</button>
+            
+                <!-- Login link -->
+                <div class="register-link">
+                    <p>Already have an account? <a href="/login">Login</a></p>
+                </div>
+            </form>
 
-    <!-- Email input box -->
-    <div class="input-box">
-        <input type="email" name="email" placeholder="Email" required>   
-    </div>
+        </div>
+</div>
 
-    <!-- Name input box -->
-    <div class="input-box">
-        <input type="text" name="name" placeholder="Name" required>   
-    </div>
 
-    <!-- Surname input box -->
-    <div class="input-box">
-        <input type="text" name="surname" placeholder="Surname" required>   
-    </div>
-
-    <!-- Phone number input box -->
-    <div class="input-box">
-        <input type="text" name="phone_number" placeholder="Phone number" required>        
-    </div>
-
-    <!-- Password input box -->
-    <div class="input-box">
-        <input type="password" name="password" placeholder="Password" required> 
-    </div>
-
-    <!-- Re-Type Password input box -->
-    <div class="input-box">
-        <input type="password" name="password2" placeholder="Re-Type password" required>
-    </div>
-
-    <!-- Sign Up button -->
-    <button type="submit" class="btn">Sign Up</button>
-
-    <!-- Login link -->
-    <div class="register-link">
-        <p>Already have an account? <a href="/login">Login</a></p>
-    </div>
-</form>
 
 {% endblock %}

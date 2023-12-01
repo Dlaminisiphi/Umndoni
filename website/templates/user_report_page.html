@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Report Page{% endblock %}
+{% block title %} Report Page - FixIt Umndoni{% endblock %}
 
 {% block content %}
 
@@ -11,13 +11,13 @@
 
     <!-- Container for the report form -->
     <div class="report-form">
-        <form action="/submit-report" method="post">
+        <form action="/reports" method="post"enctype="multipart/form-data">
             <!-- Maintenance Issue Details Section -->
             <!-- Dropdown container with a text input field -->
             <h3>Select the Maintenance Issue:</h3>
             <div class="dropdown">
                 <!-- Text input field with a placeholder -->
-                <input type="text" class="textBox" placeholder="Select the maintenance issue" readonly required>
+                <input type="text" class="textBox" name="maintenance_issue" placeholder="Select the maintenance issue" readonly required>
 
                 <!-- Options container for the dropdown menu -->
                 <div class="option">
@@ -65,13 +65,19 @@
 
             <!-- Field for writing the address -->
             <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter the address">
-
-            <!-- Google Map -->
-            <!-- Add your Google Map integration code or embed here -->
+            <input type="text" id="address" name="search_input" placeholder="Enter the address" required>
 
             <!-- Submit Button -->
-            <input type="submit" value="Submit">
+            <div class="button-styles">
+                <button class="btn" type="submit">
+                    <span class="btn__text">Submit</span>
+                    <svg class="btn__progress" viewBox="0 0 48 48" width="48px" height="48px">
+                        <circle class="btn__progress-track" r="20" cx="24" cy="24" fill="none" stroke="#c7cad1" stroke-width="8" />
+                        <circle class="btn__progress-fill" r="20" cx="24" cy="24" fill="none" stroke="#000000" stroke-width="8" transform="rotate(-90,24,24)" stroke-dasharray="125.66 125.66" stroke-dashoffset="125.66" />
+                        <polyline class="btn__progress-check" points="12,24 20,32 36,16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="34 34" stroke-dashoffset="34" />
+                    </svg>
+                </button>
+            </div>
         </form>
     </div>
 
@@ -88,4 +94,66 @@
             dropdown.classList.toggle('activate');
         }
     </script>
+    <script>
+        // Select the input element with the name "search_input"
+        var searchInput = document.querySelector('input[name="search_input"]');
+        
+        // Wait for the DOM content to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+          
+            // Create a new instance of the Google Maps Places Autocomplete
+            var autocomplete = new google.maps.places.Autocomplete(searchInput, { 
+                types: ['geocode'], // Specify the types of places to be suggested (in this case, geocodes)
+                componentRestrictions: { country: 'za' } // Restrict suggestions to a specific country (South Africa in this case)
+            }); 
+            
+            // Add a listener for the 'place_changed' event, which is triggered when a place is selected
+            autocomplete.addListener('place_changed', function () { 
+                // Get the details of the selected place
+                var near_place = autocomplete.getPlace(); 
+                // Note: You can perform additional actions with the 'near_place' data here
+            });
+        });
+    </script>
+    <script>
+        window.addEventListener("DOMContentLoaded",() => {
+            const form = document.querySelector('form');
+            const btn = document.querySelector("button");
+            var doneTimeout = null,
+                resetTimeout = null;
+
+            if (btn) {
+                btn.addEventListener("submit",function() {
+                    console.log("Button clicked");
+                    document.querySelector('form').submit();
+                    const runClass = "btn--running";
+                    const doneClass = "btn--done";
+                    // `.btn--running .btn__progress-fill` `stroke-dashoffset` duration in ms
+                    const submitDuration = 2000;
+                    const resetDuration = 1500;
+        
+                    // fake the submission
+                    this.disabled = true;
+                    this.classList.add(runClass);
+        
+                    clearTimeout(doneTimeout);
+                    clearTimeout(resetTimeout);
+        
+                    doneTimeout = setTimeout(() => {
+                        this.classList.remove(runClass);
+                        this.classList.add(doneClass);
+                        
+                        // reset the button
+                        resetTimeout = setTimeout(() => {
+                            this.disabled = false;
+                            this.classList.remove(doneClass);
+                        }, resetDuration);
+        
+                    }, 600 + submitDuration);
+                });
+            }
+            
+        });
+    </script>
+    
 {% endblock %}
