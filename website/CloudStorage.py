@@ -8,17 +8,6 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'boxwood-victor-403303-eb9ba51f97
 storage_client = storage.Client()
 
 def upload_to_cloud_storage(bucket_name, filename, file):
-    """
-    Uploads a file to Google Cloud Storage and returns the public URL.
-
-    Args:
-        bucket_name (str): The name of the Google Cloud Storage bucket.
-        filename (str): The name to be given to the uploaded file.
-        file: The file object to be uploaded.
-
-    Returns:
-        str: The public URL of the uploaded file.
-    """
     try:
         # Get the specified bucket
         bucket = storage_client.get_bucket(bucket_name)
@@ -39,13 +28,4 @@ def upload_to_cloud_storage(bucket_name, filename, file):
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
-    """
-    Check if the file has an allowed extension.
-
-    Args:
-        filename (str): The name of the file.
-
-    Returns:
-        bool: True if the file has an allowed extension, False otherwise.
-    """
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

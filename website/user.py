@@ -7,12 +7,15 @@ from .database import db, User, ReportedIssue
 
 # Import Time
 import time
+from datetime import datetime
+
+
 
 # Import security-related modules
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Import notification-related modules
-from .notifications import send_email, send_sms
+from .notifications import send_email, send_sms,convert_number
 
 # Import file upload-related modules
 from .CloudStorage import upload_to_cloud_storage, allowed_file
@@ -29,7 +32,7 @@ user = Blueprint('user', __name__)
 @user.route('/')
 def home():
 
-    return render_template("home_page.html")
+    return render_template("home_page.html" )
 
 @user.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -65,6 +68,9 @@ def signup():
 
         #Generate hashed password
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
+        #formattes phone number to +27
+        convert_number(phone_number)
         # Create a new user
         new_user = User(email=email, name=name, surname=surname, phone_number=phone_number, password=hashed_password)
 
@@ -96,9 +102,10 @@ def signup():
         send_email(email, email_subject, email_message)
 
         # Log in the new user
-        login_user(new_user)
+        login_user(new_user, remember=True)
 
         flash('Account created successfully', category='success')
+        
     
         return redirect(url_for('user.user_dashboard'))  
 
@@ -107,31 +114,38 @@ def signup():
 # Route for the login page
 @user.route('/login', methods=['GET', 'POST'])
 def login():
+    # Check if the login form has been submitted
     if request.method == 'POST':
         # Get form data
         email = request.form.get('email')
         password = request.form.get('password')
 
-        # Check if the user exists
+        # Check if the user exists in the database
         user = User.query.filter_by(email=email).first()
 
+        # If the user exists and the password is correct
         if user and check_password_hash(user.password, password):
-            # Log in the user
-            login_user(user)
-
+            # Log in the user and remember the session
+            login_user(user, remember=True)
+            
+            # Flash a success message
             flash('Logged in successfully', category='success')
             
+            # Redirect the user to the user dashboard
             return redirect(url_for('user.user_dashboard'))
         else:
+            # Flash an error message if login fails
             flash('Login failed. Check your email and password.', category='error')
 
+    # Render the login page template
     return render_template("login_page.html")
+
 
 # Route for the user dashboard
 @user.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def user_dashboard():
-
+    # Renders the user dashboard template
     return render_template("user_dashboard.html")
 
 # Route for the user reports page
@@ -188,29 +202,116 @@ def user_reports():
             db.session.commit()
             flash('Report submitted successfully', 'success')
 
+            email=current_user.email
+            phone_number=current_user.phone_number
+            date_reported = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            email_subject = f"Maintenance Query Received - {maintenance_issue}"
+            email_message=f'''
+            Dear {current_user.name},
+
+
+            Thank you for reporting a maintenance issue in Umdoni Municipality.
+            Your report has been received, and we appreciate your effort in helping us maintain our community.
+            Here are the details of your report:
+
+            Report ID: {new_report.id}
+            Issue: {brief_description}
+            Report Adress: {new_report.id}
+            Date Reported: {date_reported}
+
+            Our dedicated team is now reviewing your report. 
+            We understand the importance of addressing maintenance issues promptly and will keep you updated on the progress. 
+            If you have additional details or concerns, please reply to this email. 
+
+            Thank you for being an active participant in keeping Umdoni Municipality in good condition. 
+
+           Have questions? Reach us at fixitumdoni@gmail.com. 
+
+           Let's make Umdoni better together!
+
+           Best,
+           The FixIt Umdoni Team 🌟
+           '''
+            message_body=f'''
+            Hello {current_user.name},
+
+            Thank you for submitting a report. Your Report ID is {new_report.id}. 
+            We've received your information and are actively reviewing the issue. 
+            We'll keep you updated on the progress.  
+            If you have questions, reply to this message.
+
+            Fixit Umndoni 
+            fixitumdoni@gmail.com
+            '''
+            
+            send_email(email, email_subject, email_message)
+            send_sms(phone_number, message_body)
+
             # Redirect the user to the dashboard after successful submission
             return redirect(url_for('user.user_dashboard'))  
 
     # Render the user report page with the Google Maps API key
-    return render_template("user_report_page.html", google_maps_api_key=google_maps_api_key)
+    return render_template("user_report_page.html", google_maps_api_key=google_maps_api_key,user=current_user)
 
 
 # Route for the tracking page
 @user.route('/track')
 @login_required
 def tracking():
+    # Query all reported issues associated with the current user
+    report = ReportedIssue.query.filter_by(user_id=current_user.id).all()
 
-    return render_template("tracking_page.html")
+    # Get the current user
+    user = current_user
+
+    # Render the tracking page with the list of reported issues and user information
+    return render_template("tracking_page.html", report=report, user=user)
 
 # Route for the user profile page
-@user.route('/profile')
+@user.route('/profile', methods=['GET', 'POST'])
 @login_required
 def user_profile():
 
-    return render_template("user_profile.html")
+    if request.method == 'POST':
+        # Get updated details from the form
+        new_name = request.form.get('first_name')
+        new_surname = request.form.get('surname')
+        new_phone_number = request.form.get('phone_number')
+        new_email = request.form.get('email_id')
 
+                # Check if name and surname have more than 4 characters
+        if len(new_name) < 5 or len(new_surname) < 5:
+            flash('Name and surname must have at least 5 characters', category='error')
+            return redirect(url_for('user.user_profile'))
+
+        # Check if phone number is exactly 10 digits and consists of only numbers
+        if not (new_phone_number.isdigit() and len(new_phone_number) == 10):
+            flash('Phone number must be 10 digits and consist of only numbers',category='error')
+            return redirect(url_for('user.user_profile'))
+
+        #converts number to +27
+        convert_number(new_phone_number)
+
+        # Update user details in the database
+        current_user.name = new_name
+        current_user.surname = new_surname
+        current_user.phone_number = new_phone_number
+        current_user.email = new_email
+
+        # Commit changes to the database
+        db.session.commit()
+
+        flash('Profile updated successfully', 'success')
+
+    return render_template("user_profile.html",user = current_user)
+
+# Route to log user out
 @user.route('/logout')
 @login_required
 def logout():
+    # Log out the current user using Flask-Login's logout_user function
     logout_user()
+
+    # Redirect the user to the login page after successful logout
     return redirect(url_for('user.login'))
