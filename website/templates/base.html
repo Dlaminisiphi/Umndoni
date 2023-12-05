@@ -55,13 +55,13 @@
 
         {% if current_user.is_authenticated %}
             <!-- If the user is logged in, show these links -->
-            <li><a href="">Profile</a></li>
-            <li><a href="">Report Issue</a></li>
-            <li><a href="">Track Query</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/reports">Report Issue</a></li>
+            <li><a href="track">Track Query</a></li>
             <li><a href="/logout">Log Out</a></li>
         {% else %}
             <!-- If the user is not logged in, show these links -->
-            <li><a href="">Login</a></li>
+            <li><a href="/login">Login</a></li>
             <!-- Navigation links -->
             <li><a href="">Home</a></li>
             <li><a href="">About</a></li>

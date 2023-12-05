@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %} Tracking - FixIt Umndoni{% endblock %}
 {% block content %}
+{% for report in report %}
 <!-- Container for the entire issue tracking section -->
 <div class="track-styles">
 
@@ -11,13 +12,17 @@
 
             <!-- Title of the reported issue -->
             <div class="Issue">
-                <h1>Reported Issue: <span>Street lights</span></h1>
+                
+
+                
+
+                <h1>Reported Issue: <span>{{ report.maintenance_issue }}</span></h1>
             </div>
 
             <!-- Date and Reference information -->
             <div class="date">
-                <p>Date Reported: 21/10/2021</p>
-                <p>Refrence: <b>3838383223342</b> </p>
+                <p>Date Reported: {{ report.date }}</p>
+                <p>Refrence: <b>{{ report.id }}</b> </p>
             </div>
 
         </div>
@@ -67,5 +72,40 @@
 
     </div>
 
+    <style>
+        /* Styling for the line indicating progress in the progress tracker */
+        #progress::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: {% if report.progress == 'Processing' %}0%{% elif report.progress == 'With Maintenance Team' %}30%{% elif report.progress == 'Work Officially Commenced' %}55%{% elif report.progress == 'Query Fixed' %}80%{% else %}100%{% endif %};
+            height: 10px;
+            background: #651fff;
+            z-index: 111;
+        }
+
+        /* Styling for the checkmark before the second completed item in the progress tracker */
+        #progress li:nth-child(2)::before {
+            content: '\2713';
+            font-weight: bold;
+            background: {% if report.progress == 'Processing' %}#c5cae9{% else %} #651fff{% endif %};
+        }
+
+         /* Styling for the checkmark before the third completed item in the progress tracker */
+        #progress li:nth-child(3)::before {
+            content: '\2713';
+            font-weight: bold;
+            background: {% if report.progress in ['Processing', 'Maintenance'] %}#c5cae9{% else %} #651fff{% endif %};
+        }
+
+         /* Styling for the checkmark before the fourth completed item in the progress tracker */
+        #progress li:nth-child(4)::before {
+            content: '\2713';
+            font-weight: bold;
+            background: {% if report.progress in ['Processing', 'Maintenance','Work Officially Commenced'] %}#c5cae9{% else %} #651fff{% endif %};
+        }
+    </style>
+
 </div>
+{% endfor %}
 {% endblock %}

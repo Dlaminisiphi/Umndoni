@@ -2,6 +2,8 @@
 import googlemaps
 from geopy.distance import geodesic
 import os
+from geopy.exc import GeocoderTimedOut
+
 
 # Fetch the Google Maps API key from the environment variable
 google_maps_api_key = os.getenv("GOOGLE_MAPS_API_KEY")
@@ -17,20 +19,21 @@ from geopy.exc import GeocoderTimedOut
 gmaps = googlemaps.Client(key=google_maps_api_key)
 
 # Function to get coordinates (latitude, longitude) from an user address using Nominatim geocoding
-def get_coordinates_from_address(address):
+def get_coordinates_from_address(address, max_retries=3, timeout=15):
     geolocator = Nominatim(user_agent="geopy")  
     
-    try:
-        location = geolocator.geocode(address)  
-        if location:
-            return location.latitude, location.longitude  
-    except GeocoderTimedOut:
-        pass  
+    for _ in range(max_retries):
+        try:
+            location = geolocator.geocode(address, timeout=timeout)
+            if location:
+                return location.latitude, location.longitude
+        except GeocoderTimedOut:
+            pass
     
-    return None  
+    return None
 
 # Function to check if user address is within Umndoni Municipality
 def is_within_distance(coord1, coord2, distance_km):
-    if coord1 and coord2:
-        return geodesic(coord1, coord2).kilometers <= distance_km  
-    return False  
+    if coord1 is not None and coord2 is not None:
+        return geodesic(coord1, coord2).kilometers <= distance_km
+    return False

@@ -888,7 +888,7 @@ input#address {
 /*Style for Tracking Page*/
 
 /* Container styling for the entire tracking section */
-.tracking-style{
+.track-style{
     width: 100%;
     min-height: 100vh;
     background:#8c9eff;
@@ -973,27 +973,10 @@ input#address {
     z-index: 11111;
 }
 
-/* Styling for the checkmark before the last completed item in the progress tracker */
-#progress li:last-child::before{
-    content: '\2713';
-    font-weight: bold;
-    background: #c5cae9;
-}
 
-/* Styling for the line indicating progress in the progress tracker */
-#progress::before{
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 55%;
-    margin-left: 35px;
-    height: 10px;
-    background: #651fff;
-    z-index: 111;
-}
 
 /* Styling for the line indicating remaining progress in the progress tracker */
-progress::after{
+#progress::after{
     content: '';
     position: absolute;
     top: 20px;

@@ -34,6 +34,17 @@ def send_email(receiver_email, subject, message):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+#converts the user phone number to corrct formatt
+def convert_number(phone_number):
+    
+    if phone_number.startswith('0'):
+      
+        return '+27' + phone_number[1:]
+    else:
+     
+        return phone_number
+
+
 def send_sms(to_number, message_body):
     try:
         # Twilio Account SID and Auth Token
@@ -45,6 +56,7 @@ def send_sms(to_number, message_body):
 
         # Create a Twilio client
         client = Client(account_sid, auth_token)
+
 
         # Send an SMS
         message = client.messages.create(

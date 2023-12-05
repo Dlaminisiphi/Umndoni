@@ -26,22 +26,25 @@ def create_app():
     from .user import user
     from .database import User, ReportedIssue
     
-    # Create the database if it does not exist
-    create_database(app)
     
-    # Configure LoginManager for user authentication
+    
+
+    # Register blueprints for different parts of the application
+    app.register_blueprint(admin, url_prefix='/') 
+    app.register_blueprint(user, url_prefix='/')
+
+    # Create the database if it does not exist
+    create_database(app)  
+    
+     # Configure LoginManager for user authentication
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'  # URL to redirect to for login
+    login_manager.login_view = 'user.login'  # URL to redirect to for login
     login_manager.init_app(app)
     
     # Define how to load a user for Flask-Login
     @login_manager.user_loader 
     def load_user(id):
-        return User.query.get(int(id))
-
-    # Register blueprints for different parts of the application
-    app.register_blueprint(admin, url_prefix='/') 
-    app.register_blueprint(user, url_prefix='/')    
+        return User.query.get(int(id))   
 
     return app
 
