@@ -1,0 +1,139 @@
+{% extends "admin-base.html" %} {% block title %}FixIt Umdoni - Maintenance Team Dashboard {% endblock %}
+{% block content %}
+<style>
+    /* Styling for the overlay background */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Styling for the popup form */
+    .popup {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    /* Styling for the form elements */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Styling for the submit and cancel buttons */
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    /* Styling for the dropdown list */
+    select {
+      width: 100%;
+      padding: 5px;
+    }
+  </style>
+<div class="dashboard-section">
+
+    <div class="Maintenance-section">
+
+        <div class="section-content">
+            <div class="section-header">
+                <h3>Maintenance Team Info</h3>
+                <button onclick="openPopup()">Add Team <span class="las la-arrow-right"></span></button>
+                <!-- Trigger button to open the popup -->
+
+<!-- Popup form -->
+<div id="popup" class="overlay">
+  <div class="popup">
+    <h2>Add Team</h2>
+    <form onsubmit="submitForm(); return false;">
+      <label for="foreman">Foreman:</label>
+      <input type="text" id="foreman" required>
+
+      <label for="department">Department:</label>
+      <select id="department" required>
+        <option value="department1">Department 1</option>
+        <option value="department2">Department 2</option>
+        <option value="department3">Department 3</option>
+        <option value="department4">Department 4</option>
+      </select>
+
+      <div class="buttons">
+        <button type="submit">Submit</button>
+        <button onclick="closePopup()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Function to open the popup
+  function openPopup() {
+    document.getElementById('popup').style.display = 'flex';
+  }
+
+  // Function to close the popup
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  // Function to handle form submission
+  function submitForm() {
+    // Retrieve form values
+    var foreman = document.getElementById('foreman').value;
+    var department = document.getElementById('department').value;
+
+    // Perform further actions (e.g., send data to the server)
+
+    // Close the popup
+    closePopup();
+  }
+</script>
+            </div>
+            <div class="table-responsive">
+                <table width="100%">
+                    <!-- Table header with column names -->
+                    <thead>
+                        <tr>
+                            <th>Foreman</th>
+                            <th>Department</th>
+                            <th>Number of jobs</th>
+                        </tr>
+                    </thead>
+                    <!-- Table body with query information -->
+                    <tbody>
+                        <tr>
+                            <td>siphi</td>
+                            <td>Water Problem</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td>siphi</td>
+                            <td>Water Problem</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td>siphi</td>
+                            <td>Water Problem</td>
+                            <td>7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

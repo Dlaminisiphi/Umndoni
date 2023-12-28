@@ -9,8 +9,6 @@ from .database import db, User, ReportedIssue
 import time
 from datetime import datetime
 
-
-
 # Import security-related modules
 from werkzeug.security import generate_password_hash, check_password_hash
 

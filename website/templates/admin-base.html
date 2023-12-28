@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadata and character set configuration -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- Link to custom stylesheet and external icon library -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Title for the page -->
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Sidebar with navigation links -->
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-heading">
+            <h1>FIXIT Umdoni</h1>
+        </div>
+
+        <!-- Sidebar menu items -->
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="#" class="active">
+                        <img src="https://img.icons8.com/external-flaticons-lineal-flat-icons/64/external-dashboard-computer-programming-flaticons-lineal-flat-icons.png"
+                            alt="external-dashboard-computer-programming-flaticons-lineal-flat-icons" />
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="https://img.icons8.com/external-edtim-outline-edtim/50/external-Icons_250_049-office-edtim-outline-edtim.png"
+                            alt="external-Icons_250_049-office-edtim-outline-edtim" />
+                        <span>Maintenance Team</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="https://img.icons8.com/external-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto/64/external-box-report-shop-delivery-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto.png"
+                            alt="external-box-report-shop-delivery-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto" />
+                        <span>Maintenance Queries</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="https://img.icons8.com/glyph-neue/64/group--v1.png" alt="group--v1" />
+                        <span>Users</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main content section -->
+    <div class="main-content">
+        <!-- Header section with navigation toggle, search bar, and user information -->
+        <header>
+            <h1>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Dashboard
+            </h1>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="search here" />
+            </div>
+
+            <div class="user-wrapper">
+                <img src="https://img.icons8.com/ios-filled/50/admin-settings-male.png" alt="admin-settings-male" />
+                <div>
+                    <h4> Siphi</h4>
+                    <small>Admin</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area with dashboard information -->
+        <main>
+
+            <!-- Dashboard information cards -->
+            <div class="dashboard-info">
+                <div class="single-card-info">
+                    <div>
+                        <h1>43</h1>
+                        <span>New Queries</span>
+                    </div>
+                    <div>
+                        <img width="50" height="50" src="https://img.icons8.com/ios/50/new--v1.png" alt="new--v1" />
+                    </div>
+                </div>
+
+                <div class="single-card-info">
+                    <div>
+                        <h1>43</h1>
+                        <span>Completed Queries</span>
+                    </div>
+                    <div>
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/task-completed.png"
+                            alt="task-completed" />
+                    </div>
+                </div>
+
+                <div class="single-card-info">
+                    <div>
+                        <h1>43</h1>
+                        <span>Users</span>
+                    </div>
+                    <div>
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/group.png" alt="group" />
+                    </div>
+                </div>
+            </div>
+{% block content %}
+
+            <!-- Dashboard sections for queries in progress and new queries -->
+            <div class="dashboard-section">
+                <!-- Section for queries in progress -->
+                <div class="in-progress-section">
+                    <!-- Section header with a button to see all queries in progress -->
+                    <div class="section-content">
+                        <div class="section-header">
+                            <h3>Queries in Progress</h3>
+                            <button>See All <span class="las la-arrow-right"></span></button>
+                        </div>
+
+                        <!-- Section body containing a table of queries in progress -->
+                        <div class="section-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <!-- Table header with column names -->
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>Query Title</th>
+                                            <th>Address</th>
+                                            <th>Assigned Team</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Table body with query information -->
+                                    <tbody>
+                                        <tr>
+                                            <td>siphi</td>
+                                            <td>Water Problem</td>
+                                            <td>364 Rocklyn Drive</td>
+                                            <td>Vusi Mqhize</td>
+                                            <td>
+                                                <span class="status orange"></span>
+                                                Assigned to Maintenance Team
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>siphi</td>
+                                            <td>Water Problem</td>
+                                            <td>364 Rocklyn Drive</td>
+                                            <td>Vusi Mqhize</td>
+                                            <td>
+                                                <span class="status yellow"></span>
+                                                Work Officially Commenced
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>siphi</td>
+                                            <td>Water Problem</td>
+                                            <td>364 Rocklyn Drive</td>
+                                            <td>Vusi Mqhize</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                Query Fixed
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section for new queries -->
+                <div class="new-queries-section">
+                    <!-- Section header with a button to see all new queries -->
+                    <div class="section-content">
+                        <div class="section-header">
+                            <h3>New Queries</h3>
+                            <button class="dropdown-btn" onclick="toggleDropdown()">See All <span
+                                    class="las la-arrow-right"></span></button>
+                        </div>
+
+                        <!-- Section body containing new query information -->
+                        <div class="section-body">
+                            <!-- Repeat the structure for each new query -->
+                            <div class="new-query" onclick="enlargeImage()">
+                                <a href="{{ url_for('static', filename='images/umdoni.jpeg') }}" target="_blank">
+                                    <img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" width="100px" height="100px" alt="">
+                                </a>
+                                <h4>Water Problem</h4>
+                                <small>364 Rocklyn Drive</small><br>
+                                <small>There is a water problem at Rocklyn Drive</small><br>
+                                <small>Water Problem</small>
+                            </div>
+                            <div class="new-query" onclick="showDropdown()">
+                                <a href="{{ url_for('static', filename='images/umdoni.jpeg') }}" target="_blank">
+                                    <img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" width="100px" height="100px" alt="">
+                                </a>
+                                <h4>Water Problem</h4>
+                                <small>364 Rocklyn Drive</small><br>
+                                <small>There is a water problem at Rocklyn Drive</small><br>
+                                <small>Water Problem</small>
+                            </div>
+                            
+                            <div class="overlay" id="overlay" onclick="hideDropdown()">
+                                <div id="myDropdown" class="dropdown">
+                                    <div class="dropdown-heading">Select Maintenance Team</div>
+                                    <a href="#" onclick="selectTeam('Maintenance Team 1')">Maintenance Team 1</a>
+                                    <a href="#" onclick="selectTeam('Maintenance Team 2')">Maintenance Team 2</a>
+                                    <!-- Add more teams as needed -->
+                                    <button onclick="cancel()">Cancel</button>
+                                    <button onclick="ok()">OK</button>
+                                </div>
+                            </div>
+                            
+                            <script>
+                                function showDropdown() {
+                                    var overlay = document.getElementById("overlay");
+                                    var dropdown = document.getElementById("myDropdown");
+                            
+                                    // Center the dropdown
+                                    var top = window.innerHeight / 2 - dropdown.offsetHeight / 2;
+                                    var left = window.innerWidth / 2 - dropdown.offsetWidth / 2;
+                            
+                                    dropdown.style.top = top + "px";
+                                    dropdown.style.left = left + "px";
+                            
+                                    // Show the overlay and dropdown
+                                    overlay.style.display = "flex";
+                                    dropdown.style.display = "block";
+                                }
+                            
+                                function hideDropdown() {
+                                    var overlay = document.getElementById("overlay");
+                                    var dropdown = document.getElementById("myDropdown");
+                            
+                                    // Hide the overlay and dropdown
+                                    overlay.style.display = "none";
+                                    dropdown.style.display = "none";
+                                }
+                            
+                                function selectTeam(teamName) {
+                                    // Handle the selected maintenance team (e.g., store it in a variable)
+                                    console.log("Selected Maintenance Team: " + teamName);
+                            
+                                    // Optionally, close the dropdown after selecting a team
+                                    hideDropdown();
+                                }
+                            
+                                function cancel() {
+                                    
+                                    hideDropdown();
+                                }
+                            
+                                function ok() {
+                                    // Add any additional OK logic here
+                                    hideDropdown();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+        </main>
+    </div>
+</body>
+
+</html>

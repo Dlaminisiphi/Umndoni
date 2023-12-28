@@ -290,31 +290,30 @@ section .featured-categories li {
 /* Media query for responsive design on screens with a maximum width of 600px */
 @media screen and (max-width: 600px) {
     section {
-        padding: 15px; /* Adjust padding for smaller screens */
+        padding: 15px; 
     }
 
     section h2 {
-        font-size: 30px; /* Adjust font size for smaller screens */
+        font-size: 30px; 
     }
 
     section p {
-        font-size: 16px; /* Adjust font size for smaller screens */
+        font-size: 16px; 
     }
 
     section h3 {
-        font-size: 18px; /* Adjust font size for smaller screens */
+        font-size: 18px;    
     }
 
     .featured-categories li {
-        font-size: 20px; /* Adjust font size for smaller screens */
+        font-size: 20px; 
     }
 
     .featured-categories li img.category-icon {
-        height: 30px; /* Adjust icon height for smaller screens */
+        height: 30px; 
     }
 }
 
-/* Your existing styles for larger screens */
 
 /* Styling for the sections on home page */
 section {
