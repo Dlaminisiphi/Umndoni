@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
     <!-- Title for the page -->
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}FixIt Umdoni - Dashboard{% endblock %}</title>
 </head>
 
 <body>
@@ -27,31 +27,31 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="#" class="active">
+                    <a href="/admin" {% if request.path == '/admin' %}class="active"{% endif %} >
                         <img src="https://img.icons8.com/external-flaticons-lineal-flat-icons/64/external-dashboard-computer-programming-flaticons-lineal-flat-icons.png"
-                            alt="external-dashboard-computer-programming-flaticons-lineal-flat-icons" />
+                            alt="Dashboard Icon" />
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="/maintenance-team" {% if request.path == '/maintenance-team' %}class="active"{% endif %}>
                         <img src="https://img.icons8.com/external-edtim-outline-edtim/50/external-Icons_250_049-office-edtim-outline-edtim.png"
-                            alt="external-Icons_250_049-office-edtim-outline-edtim" />
+                            alt="Maintenece team icon" />
                         <span>Maintenance Team</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="/maintenance-queries" {% if request.path == '/maintenance-queries' %}class="active"{% endif %}>
                         <img src="https://img.icons8.com/external-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto/64/external-box-report-shop-delivery-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto.png"
-                            alt="external-box-report-shop-delivery-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto" />
+                            alt="Maintance query icon" />
                         <span>Maintenance Queries</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="/maintenance-users" {% if request.path == '/maintenance-users' %}class="active"{% endif %} >
                         <img src="https://img.icons8.com/glyph-neue/64/group--v1.png" alt="group--v1" />
                         <span>Users</span>
                     </a>
@@ -92,7 +92,7 @@
             <div class="dashboard-info">
                 <div class="single-card-info">
                     <div>
-                        <h1>43</h1>
+                        <h1>{{ num_users }}</h1>
                         <span>New Queries</span>
                     </div>
                     <div>
@@ -102,7 +102,7 @@
 
                 <div class="single-card-info">
                     <div>
-                        <h1>43</h1>
+                        <h1>{{ num_in_finished_issues }}</h1>
                         <span>Completed Queries</span>
                     </div>
                     <div>
@@ -113,7 +113,7 @@
 
                 <div class="single-card-info">
                     <div>
-                        <h1>43</h1>
+                        <h1>{{ num_in_progress_issues }}</h1>
                         <span>Users</span>
                     </div>
                     <div>
@@ -131,7 +131,7 @@
                     <div class="section-content">
                         <div class="section-header">
                             <h3>Queries in Progress</h3>
-                            <button>See All <span class="las la-arrow-right"></span></button>
+                            
                         </div>
 
                         <!-- Section body containing a table of queries in progress -->
@@ -150,38 +150,30 @@
                                     </thead>
                                     <!-- Table body with query information -->
                                     <tbody>
-                                        <tr>
-                                            <td>siphi</td>
-                                            <td>Water Problem</td>
-                                            <td>364 Rocklyn Drive</td>
-                                            <td>Vusi Mqhize</td>
-                                            <td>
-                                                <span class="status orange"></span>
-                                                Assigned to Maintenance Team
-                                            </td>
-                                        </tr>
 
+                                        {% for issue in reported_issues %}
+                                        {% if issue.progress != 'in progress' %}
                                         <tr>
-                                            <td>siphi</td>
-                                            <td>Water Problem</td>
-                                            <td>364 Rocklyn Drive</td>
-                                            <td>Vusi Mqhize</td>
+                                            <td>{{ issue.user.name }}</td>
+                                            <td>{{ issue.maintenance_issue }}</td>
+                                            <td>{{ issue.address }}</td>
+                                            <td>{{ issue.maintenance_team }}</td>
                                             <td>
-                                                <span class="status yellow"></span>
-                                                Work Officially Commenced
+                                                {% if issue.progress == 'Assigned to Maintenance Team' %}
+                                                    <span class="status orange"></span>
+                                                    Assigned to Maintenance Team
+                                                {% elif issue.progress == 'completed' %}
+                                                    <span class="status green"></span>
+                                                    Completed
+                                                {% else %}
+                                                    <span class="status yellow"></span>
+                                                    Work Officially Commenced
+                                                {% endif %}
                                             </td>
                                         </tr>
+                                        {% endif %}
+                                        {% endfor %}
 
-                                        <tr>
-                                            <td>siphi</td>
-                                            <td>Water Problem</td>
-                                            <td>364 Rocklyn Drive</td>
-                                            <td>Vusi Mqhize</td>
-                                            <td>
-                                                <span class="status green"></span>
-                                                Query Fixed
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -195,32 +187,25 @@
                     <div class="section-content">
                         <div class="section-header">
                             <h3>New Queries</h3>
-                            <button class="dropdown-btn" onclick="toggleDropdown()">See All <span
-                                    class="las la-arrow-right"></span></button>
+ 
                         </div>
 
                         <!-- Section body containing new query information -->
                         <div class="section-body">
-                            <!-- Repeat the structure for each new query -->
-                            <div class="new-query" onclick="enlargeImage()">
-                                <a href="{{ url_for('static', filename='images/umdoni.jpeg') }}" target="_blank">
-                                    <img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" width="100px" height="100px" alt="">
+
+                            {% for issue in reported_issues %}
+                            {% if issue.progress == 'in progress' %}
+                             <div class="new-query" onclick="showDropdown()">
+                                <a href= "{{ issue.picture }}" target="_blank">
+                                    <img src="{{ issue.picture }}" alt="Uploaded Image" width="100px" height="100px" >
                                 </a>
-                                <h4>Water Problem</h4>
-                                <small>364 Rocklyn Drive</small><br>
-                                <small>There is a water problem at Rocklyn Drive</small><br>
-                                <small>Water Problem</small>
-                            </div>
-                            <div class="new-query" onclick="showDropdown()">
-                                <a href="{{ url_for('static', filename='images/umdoni.jpeg') }}" target="_blank">
-                                    <img src="{{ url_for('static', filename='images/umdoni.jpeg') }}" width="100px" height="100px" alt="">
-                                </a>
-                                <h4>Water Problem</h4>
-                                <small>364 Rocklyn Drive</small><br>
-                                <small>There is a water problem at Rocklyn Drive</small><br>
-                                <small>Water Problem</small>
-                            </div>
-                            
+                                <h4>{{ issue.maintenance_issue }}</h4>
+                                <small>{{ issue.address }}</small><br>
+                                <small>{{ issue.description }}</small><br>
+                                <small>{{ issue.maintenance_issue }}</small>
+                             </div>
+                            {% endif %}
+                            {% endfor %}
                             <div class="overlay" id="overlay" onclick="hideDropdown()">
                                 <div id="myDropdown" class="dropdown">
                                     <div class="dropdown-heading">Select Maintenance Team</div>
@@ -282,7 +267,45 @@
             </div>
 {% endblock %}
         </main>
-    </div>
+
+<!-- Check if there are messages to display -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message  in messages %}
+            <!-- Create a pop-up div with dynamic styling for the button -->
+            <div class="popup open-popup">
+                
+                {% if category == 'success' %}
+                    <!-- Positive pop-up styling for success messages -->
+                    <img src="{{ url_for('static', filename='images/tick.png') }}" alt="tick-image">
+                    <h2>Thank You</h2>
+                    <!-- Set green color for success button -->
+                    <p>{{ message }}</p>
+                    <button type="button" onclick="closePopup()" style="background-color: green;">OK</button>
+                {% else %}
+                    <!-- Negative pop-up styling for other messages -->
+                    <img src="{{ url_for('static', filename='images/cross.png') }}" alt="cross-image">
+                    <h2>Oops!</h2>
+                    <!-- Set red color for error button -->
+                    <p>{{ message }}</p>
+                    <button type="button" onclick="closePopup()" style="background-color: red;">OK</button>
+                {% endif %}
+                
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<script>
+    function closePopup() {
+        console.log('Closing popup');
+        var popup = document.querySelector('.popup');
+        popup.classList.remove('open-popup');
+    }
+    
+</script>
+
+</div>
 </body>
 
 </html>

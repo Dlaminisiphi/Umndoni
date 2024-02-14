@@ -192,6 +192,7 @@ def user_reports():
                 picture=image_url,
                 address=address,
                 progress='Processing',
+                maintenance_team='none',
                 user_id=current_user.id
             )
 
